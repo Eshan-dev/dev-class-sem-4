@@ -4,19 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Portal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav >
+    <nav id="navContainer">
         <div id = "navBar">
             <div id="leftComp">
                 <img src="https://static.naukimg.com/s/0/0/i/naukri-identity/naukri_gnb_logo.svg">
+                <div id = "leftComp-sub">
+                    <a class="leftComp-sub-ele">Jobs</a>
+                    <a class="leftComp-sub-ele">Companies</a>
+                </div>
             </div>
-            <div id = "midComp"></div>
             <div id = "rightComp">
-            <button>Login</button>
-            <button>Register</button>
+                <div id="btnContainer">
+                    <button id = "loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
+                </div>
             </div>
         </div>
     </nav>
+    <section id ="mainContainer">
+        <div>
+            <h1>Find your dream job now</h1>
+        </div>
+        <div>
+            <input id = "inputBox" placeholder="Search Companies">
+            <button>Search</button>
+        </div>
+    </section>
 </body>
 </html>
