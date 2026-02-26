@@ -35,52 +35,55 @@
                 <button>Search</button>
             </div>
         </div>
-        <div id = jobs-container>
-            <div class = "job">
-                <img class="job-image-container" src="https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg">
-                <div class = "job-description-container">
-
-                    <div class="company-name">Google</div>
-                    <div class="job-info">
-                        <div class="salary-info">28LPA</div>
-                        <div class="location-info">Bengaluru</div>
-                    </div>
-                </div>
-            </div>
-            <div class = "job">
-                <img class="job-image-container" src="https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg">
-                <div class = "job-description-container">
-
-                    <div class="company-name">Google</div>
-                    <div class="job-info">
-                        <div class="salary-info">28LPA</div>
-                        <div class="location-info">Bengaluru</div>
-                    </div>
-                </div>
-            </div>
-            <div class = "job">
-                <img class="job-image-container" src="https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg">
-                <div class = "job-description-container">
-
-                    <div class="company-name">Google</div>
-                    <div class="job-info">
-                        <div class="salary-info">28LPA</div>
-                        <div class="location-info">Bengaluru</div>
-                    </div>
-                </div>
-            </div>
-            <div class = "job">
-                <img class="job-image-container" src="https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg">
-                <div class = "job-description-container">
-
-                    <div class="company-name">Google</div>
-                    <div class="job-info">
-                        <div class="salary-info">28LPA</div>
-                        <div class="location-info">Bengaluru</div>
-                    </div>
-                </div>
-            </div>
+        <div id="jobs-container">
+            <!-- Jobs will be loaded here from localStorage -->
         </div>
     </section>
+
+    <script>
+        window.addEventListener('load', function () {
+            const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const jobContainer = document.getElementById('jobs-container');
+            jobContainer.innerHTML = '';
+
+            jobs.forEach(function (job) {
+                const jobCard = document.createElement('div');
+                jobCard.className = 'job';
+
+                const img = document.createElement('img');
+                img.className = 'job-image-container';
+                img.src = 'https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg'; // Google image for now
+
+                const descContainer = document.createElement('div');
+                descContainer.className = 'job-description-container';
+
+                const companyName = document.createElement('div');
+                companyName.className = 'company-name';
+                companyName.textContent = job.company;
+
+                const jobInfo = document.createElement('div');
+                jobInfo.className = 'job-info';
+
+                const salaryInfo = document.createElement('div');
+                salaryInfo.className = 'salary-info';
+                salaryInfo.textContent = job.salary;
+
+                const locationInfo = document.createElement('div');
+                locationInfo.className = 'location-info';
+                locationInfo.textContent = job.location;
+
+                jobInfo.appendChild(salaryInfo);
+                jobInfo.appendChild(locationInfo);
+
+                descContainer.appendChild(companyName);
+                descContainer.appendChild(jobInfo);
+
+                jobCard.appendChild(img);
+                jobCard.appendChild(descContainer);
+
+                jobContainer.appendChild(jobCard);
+            });
+        });
+    </script>
 </body>
 </html>
