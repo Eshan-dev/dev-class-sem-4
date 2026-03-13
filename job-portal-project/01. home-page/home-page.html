@@ -31,8 +31,8 @@
                 <h1>Find your dream job now</h1>
             </div>
             <div>
-                <input id = "inputBox" placeholder="Search Companies">
-                <button>Search</button>
+                <input id="inputBox" placeholder="Search Companies">
+                <button id="searchButton">Search</button>
             </div>
         </div>
         <div id="jobs-container">
@@ -41,18 +41,21 @@
     </section>
 
     <script>
-        window.addEventListener('load', function () {
-            const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+        const GOOGLE_JOB_IMAGE =
+            'https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg';
+
+        function renderJobs(jobsToRender) {
             const jobContainer = document.getElementById('jobs-container');
             jobContainer.innerHTML = '';
 
-            jobs.forEach(function (job) {
+            jobsToRender.forEach(function (job) {
                 const jobCard = document.createElement('div');
                 jobCard.className = 'job';
 
                 const img = document.createElement('img');
                 img.className = 'job-image-container';
-                img.src = 'https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg'; // Google image for now
+        
+                img.src = job.image && job.image.trim() ? job.image : GOOGLE_JOB_IMAGE;
 
                 const descContainer = document.createElement('div');
                 descContainer.className = 'job-description-container';
@@ -82,6 +85,35 @@
                 jobCard.appendChild(descContainer);
 
                 jobContainer.appendChild(jobCard);
+            });
+        }
+
+        window.addEventListener('load', function () {
+            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            renderJobs(allJobs);
+
+            const searchInput = document.getElementById('inputBox');
+            const searchButton = document.getElementById('searchButton');
+
+            function applySearch() {
+                const term = searchInput.value.trim().toLowerCase();
+                if (!term) {
+                    renderJobs(allJobs);
+                    return;
+                }
+
+                const filtered = allJobs.filter(function (job) {
+                    return job.company && job.company.toLowerCase().includes(term);
+                });
+
+                renderJobs(filtered);
+            }
+
+            searchButton.addEventListener('click', applySearch);
+            searchInput.addEventListener('keyup', function (e) {
+                if (e.key === 'Enter') {
+                    applySearch();
+                }
             });
         });
     </script>

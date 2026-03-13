@@ -1,0 +1,15 @@
+#form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formField{
+  width: 250px;
+}
+#formButton{
+  width : 90px;
+}
+#TopBar{
+  display: flex;
+  justify-content: space-between;
+}
